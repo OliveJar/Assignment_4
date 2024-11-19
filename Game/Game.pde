@@ -4,7 +4,7 @@ float t = 0;
 
 void setup()
 {
-  size(400, 400);
+  size(1200, 1200);
 }
 
 void draw()
@@ -15,34 +15,34 @@ void draw()
   ellipseMode(CENTER);
   
   fill(255);
-  rect(200, 200, 300, 300);
+  rect(600, 600, 600, 900);
   
   strokeWeight(height+width);
   fill(255, 100);
   stroke(0);
-  ellipse(mouseX, mouseY, 700, 700);
+  ellipse(mouseX, mouseY, 2100, 2100);
   noStroke();
   fill(110, 100);
-  triangle(mouseX - 50, mouseY, mouseX + 50, mouseY, map(mouseX, 0, width, 110, 290), map(mouseY, 0, width, 220, 400));
-  arc(mouseX, mouseY, 100, 100, PI, PI*2);
+  triangle(mouseX - 150, mouseY, mouseX + 150, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 660, 1200));
+  arc(mouseX, mouseY, 300, 300, PI, PI*2);
   
   if (spin & t < 100)
   {
   fill(200, 200, 100);
-  arc(map(mouseX, 0, width, 105, 295), map(mouseY, 0, width, 210, 395), 100, 100, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
+  arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 300, 300, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
   }
   t++;
 
-  strokeWeight(1);
+  strokeWeight(3);
   fill(100);
   stroke(0);
-  ellipse(map(mouseX, 0, width, 105, 295), map(mouseY, 0, width, 210, 395), 50, 50);
-  ellipse(map(mouseX, 0, width, 110, 290), map(mouseY, 0, width, 220, 395), 50, 50);
+  ellipse(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 150, 150);
+  ellipse(map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 660, 1185), 150, 150);
   
   fill(110);
-  strokeWeight(30);
+  strokeWeight(90);
   stroke(120);
-  line (map(mouseX, 0, width, 110, 290), map(mouseY, 0, width, 220, 400), map(mouseX, 0, width, 150, 250), map(mouseY, 0, width, 300, 400));
+  line (map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 660, 1200), map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200));
   
   /*strokeWeight(50);
   stroke(100);
@@ -50,7 +50,7 @@ void draw()
   
   noStroke();
   fill(100);
-  ellipse (map(mouseX, 0, width, 150, 250), map(mouseY, 0, width, 300, 400), 30, 30);
+  ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 90, 90);
   
   
   /*noStroke();
