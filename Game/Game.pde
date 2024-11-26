@@ -26,29 +26,34 @@ void draw()
   //Triangle/Light refraction of flashlight
   noStroke();
   fill(110, 100);
-  triangle(mouseX - 150, mouseY, mouseX + 150, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 660, 1200));
+  triangle(mouseX - 150, mouseY, mouseX + 150, mouseY, map(mouseX, 0, width, 320, 880), map(mouseY, 0, width, 740, 1200));
   arc(mouseX, mouseY, 300, 300, PI, PI*2);
   
   //Reload animation
   if (spin & t < 100)
   {
+    //reload animation placeholder
   fill(200, 200, 100);
   arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 300, 300, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
   }
   t++;
 
   //Flashlight tip
-  strokeWeight(3);
+  strokeWeight(1.5);
   fill(100);
   stroke(0);
-  ellipse(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 150, 150);
-  ellipse(map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 660, 1185), 150, 150);
+  ellipse(map(mouseX, 0, width, 325, 875), map(mouseY, 0, width, 700, 1190), 75, 75);
+  noStroke();
+  ellipse(map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 710, 1180), 75, 75);
+  ellipse(map(mouseX, 0, width, 340, 860), map(mouseY, 0, width, 730, 1190), 75, 75);
+  stroke(0);
+  ellipse(map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1190), 75, 75);
   
   //Handle
   fill(110);
-  strokeWeight(90);
+  strokeWeight(45);
   stroke(120);
-  line (map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 660, 1200), map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200));
+  line (map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1200), map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200));
   
   /*strokeWeight(50);
   stroke(100);
@@ -56,7 +61,7 @@ void draw()
   
   noStroke();
   fill(100);
-  ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 90, 90);
+  ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 45, 45);
   
   
   /*noStroke();
