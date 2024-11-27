@@ -26,7 +26,7 @@ void draw()
   //Triangle/Light refraction of flashlight
   noStroke();
   fill(110, 100);
-  triangle(mouseX - 150, mouseY, mouseX + 150, mouseY, map(mouseX, 0, width, 320, 880), map(mouseY, 0, width, 740, 1200));
+  triangle(mouseX - 150, mouseY, mouseX + 150, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200));
   arc(mouseX, mouseY, 300, 300, PI, PI*2);
   
   //Reload animation
@@ -44,8 +44,8 @@ void draw()
   stroke(0);
   ellipse(map(mouseX, 0, width, 325, 875), map(mouseY, 0, width, 700, 1190), 75, 75);
   noStroke();
-  ellipse(map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 710, 1180), 75, 75);
-  ellipse(map(mouseX, 0, width, 340, 860), map(mouseY, 0, width, 730, 1190), 75, 75);
+  ellipse(map(mouseX, 0, width, 333, 865), map(mouseY, 0, width, 715, 1190), 75, 75);
+  ellipse(map(mouseX, 0, width, 342, 855), map(mouseY, 0, width, 730, 1190), 75, 75);
   stroke(0);
   ellipse(map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1190), 75, 75);
   
