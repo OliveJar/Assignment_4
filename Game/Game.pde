@@ -1,6 +1,6 @@
 boolean spin;
 float t = 0;
-
+Rooms room1;
 
 void setup()
 {
@@ -14,8 +14,9 @@ void draw()
   rectMode(CENTER);
   ellipseMode(CENTER);
   
-  fill(255);
-  rect(600, 600, 600, 900);
+  //Room
+  room1 = new Rooms();
+  room1.display();
   
   //Darkness
   strokeWeight(height+width);
