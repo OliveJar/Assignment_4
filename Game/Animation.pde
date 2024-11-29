@@ -4,6 +4,6 @@ class Animation {
   
   void display()
   {
-    //image = loadImage("Batteries");
+    image = loadImage("Batteries.png");
   }
 }

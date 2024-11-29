@@ -19,6 +19,7 @@ void draw()
   //Room
   room1 = new Rooms();
   room1.display();
+  animation = new Animation();
 
   //Triangle/Light refraction of flashlight
   fill(20, 100);
@@ -44,7 +45,7 @@ void draw()
   //Reload animation
   if (spin & t < 100)
   {
-    animation.display();
+    //animation.display();
     //reload animation placeholder
     fill(0);
     rect(600, 600, width, height);
