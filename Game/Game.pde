@@ -19,17 +19,26 @@ void draw()
   room1 = new Rooms();
   room1.display();
 
+  //Triangle/Light refraction of flashlight
+  fill(20, 100);
+  triangle(mouseX - 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200), 0, 1200);
+  triangle(mouseX + 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200), 1200, 1200);
+  
   //Darkness
   strokeWeight(height+width);
   fill(255, 100);
   stroke(0);
-  ellipse(mouseX, mouseY, 2100, 2100);
+  ellipse(mouseX, mouseY, 1900, 1900);
 
   //Triangle/Light refraction of flashlight
   noStroke();
   fill(110, 100);
-  triangle(mouseX - 150, mouseY, mouseX + 150, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200));
-  arc(mouseX, mouseY, 300, 300, PI, PI*2);
+  triangle(mouseX - 250, mouseY, mouseX + 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200));
+  arc(mouseX, mouseY, 500, 500, PI, PI*2);
+  strokeWeight(50);
+  noFill();
+  stroke(0, 100);
+  ellipse(mouseX, mouseY, 450, 450);
 
   //Reload animation
   if (spin & t < 100)
