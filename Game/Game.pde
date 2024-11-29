@@ -2,6 +2,7 @@ boolean spin;
 float t = 0;
 Rooms room1;
 float distance;
+Animation animation;
 
 void setup()
 {
@@ -43,9 +44,14 @@ void draw()
   //Reload animation
   if (spin & t < 100)
   {
+    animation.display();
     //reload animation placeholder
-    fill(200, 200, 100);
-    arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 300, 300, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
+    fill(0);
+    rect(600, 600, width, height);
+    fill(0, 0);
+    stroke(100, 255, 10);
+    arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 200, 200, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
+    
   }
   t++;
 
@@ -85,8 +91,7 @@ void draw()
 
 void mousePressed()
 {
-  spin = true;
-  t = 0;
+  
 }
 void keyPressed()
 {
@@ -97,6 +102,11 @@ void keyPressed()
   if (key == 's')
   {
     distance -= 2;
+  }
+  if(key == 'r')
+  {
+    spin = true;
+    t = 0;
   }
 }
 void keyReleased()
