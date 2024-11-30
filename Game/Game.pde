@@ -7,6 +7,7 @@ boolean doorPressed;
 boolean flash = false;
 float s;
 float dSize;
+boolean menu;
 
 void setup()
 {
@@ -26,8 +27,9 @@ void draw()
   room1.display();
   animation = new Animation();
 
-  if (!gameStart)
+  if (!gameStart && !menu)
   {
+    cursor();
     textSize(60);
     fill(255);
     text("A 3D Horror Game", 390, 376);
@@ -37,6 +39,25 @@ void draw()
     text("Click anywhere to start", 330, 1004);
     fill(255, 20, 0);
     text("Click anywhere to start", 330, 1000);
+  }
+
+  if (menu && !gameStart)
+  {
+    cursor();
+    fill(255);
+    text("and right-click to interact", 300, 270);
+    fill(255, 20, 0);
+    text("Use 'w' and 's' to walk", 330, 200);
+    
+    fill(255, 20, 0);
+    text("When you see the monster", 280, 1030);
+    fill(255);
+    text("Use 'r' to turn off your flahslight", 210, 1130);
+    
+    fill(10, 255, 0);
+    rect(600, 900, 300, 100);
+    fill(0);
+    text("Play", 550, 920);
   }
 
   if (gameStart)
@@ -97,23 +118,27 @@ void draw()
     ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 45, 45);
   }
   
-  if(doorPressed)
+  if (distance <= -495)
+  {
+    fill(255, 100);
+    text("Open", 600, 600);
+  }
+
+  if (doorPressed)
   {
     animation.display();
     s++;
 
-    if(s >= 300)
+    if (s >= 300)
     {
       s = 0;
       doorPressed = false;
       room1.roomNumber++;
       distance = 0;
-    }
-    else if(s >= 250)
+    } else if (s >= 250)
     {
       dSize *= 1.2;
-    }
-    else if (s >= 200)
+    } else if (s >= 200)
     {
       dSize++;
     }
@@ -122,10 +147,19 @@ void draw()
 
 void mousePressed()
 {
-  gameStart = true;
+  if (!gameStart)
+  {
+    menu = true;
+  }
+
   if (mouseX > 150 && mouseX < 740 && mouseY > 320 && mouseY < 980 && distance <= -495)
   {
     doorPressed = true;
+  }
+  
+  if (menu && mouseX >= 450 && mouseX <= 750 && mouseY >= 800 && mouseY <= 1000)
+  {
+    gameStart = true;
   }
 }
 void keyPressed()
@@ -142,8 +176,7 @@ void keyPressed()
   if (key == 'r' && !flash)
   {
     flash = true;
-  }
-  else if (flash)
+  } else if (flash)
   {
     flash = false;
   }
