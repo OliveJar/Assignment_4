@@ -1,8 +1,12 @@
 boolean spin;
-float t = 0;
 Rooms room1;
 float distance;
 Animation animation;
+boolean gameStart = false;
+boolean doorPressed;
+boolean flash = false;
+float s;
+float dSize;
 
 void setup()
 {
@@ -15,102 +19,135 @@ void draw()
   background(10);
   rectMode(CENTER);
   ellipseMode(CENTER);
-  
+  textMode(CENTER);
+
   //Room
   room1 = new Rooms();
   room1.display();
   animation = new Animation();
 
-  //Triangle/Light refraction of flashlight
-  fill(20, 100);
-  triangle(mouseX - 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200), 0, 1200);
-  triangle(mouseX + 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200), 1200, 1200);
-  
-  //Darkness
-  strokeWeight(height+width);
-  fill(255, 100);
-  stroke(0);
-  ellipse(mouseX, mouseY, 1900, 1900);
-
-  //Triangle/Light refraction of flashlight
-  noStroke();
-  fill(110, 100);
-  triangle(mouseX - 250, mouseY, mouseX + 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200));
-  arc(mouseX, mouseY, 500, 500, PI, PI*2);
-  strokeWeight(50);
-  noFill();
-  stroke(0, 100);
-  ellipse(mouseX, mouseY, 450, 450);
-
-  //Reload animation
-  if (spin & t < 100)
+  if (!gameStart)
   {
-    //animation.display();
-    //reload animation placeholder
-    fill(0);
-    rect(600, 600, width, height);
-    fill(0, 0);
-    stroke(100, 255, 10);
-    arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 200, 200, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
-    
+    textSize(60);
+    fill(255);
+    text("A 3D Horror Game", 390, 376);
+    fill(255, 20, 0);
+    text("A 3D Horror Game", 390, 380);
+    fill(255);
+    text("Click anywhere to start", 330, 1004);
+    fill(255, 20, 0);
+    text("Click anywhere to start", 330, 1000);
   }
-  t++;
 
-  //Flashlight tip
-  strokeWeight(1.5);
-  fill(100);
-  stroke(0);
-  ellipse(map(mouseX, 0, width, 325, 875), map(mouseY, 0, width, 700, 1190), 75, 75);
-  noStroke();
-  ellipse(map(mouseX, 0, width, 333, 865), map(mouseY, 0, width, 715, 1190), 75, 75);
-  ellipse(map(mouseX, 0, width, 342, 855), map(mouseY, 0, width, 730, 1190), 75, 75);
-  stroke(0);
-  ellipse(map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1190), 75, 75);
+  if (gameStart)
+  {
+    //Triangle/Light refraction of flashlight
+    noStroke();
+    fill(20, 100);
+    triangle(mouseX - 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200), 0, 1200);
+    triangle(mouseX + 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200), 1200, 1200);
 
-  //Handle
-  fill(110);
-  strokeWeight(45);
-  stroke(120);
-  line (map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1200), map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200));
+    //Darkness
+    strokeWeight(height+width);
+    fill(255, 100);
+    stroke(0);
+    ellipse(mouseX, mouseY, 1900, 1900);
 
-  /*strokeWeight(50);
-   stroke(100);
-   line (map(mouseX, 0, width, 90, 310), map(mouseY, 0, width, 200, 420), map(mouseX, 0, width, 80, 320), map(mouseY, 0, width, 230, 470));*/
+    //Triangle/Light refraction of flashlight
+    noStroke();
+    fill(110, 100);
+    triangle(mouseX - 250, mouseY, mouseX + 250, mouseY, map(mouseX, 0, width, 330, 870), map(mouseY, 0, width, 740, 1200));
+    arc(mouseX, mouseY, 500, 500, PI, PI*2);
+    strokeWeight(50);
+    noFill();
+    stroke(0, 100);
+    ellipse(mouseX, mouseY, 450, 450);
 
-  noStroke();
-  fill(100);
-  ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 45, 45);
+    //On and Off
+    if (flash)
+    {
+      //animation.display();
+      //reload animation placeholder
+      fill(0);
+      rect(600, 600, width, height);
+      //fill(0, 0);
+      //stroke(100, 255, 10);
+      //arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 200, 200, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
+    }
 
+    //Flashlight tip
+    strokeWeight(1.5);
+    fill(100);
+    stroke(0);
+    ellipse(map(mouseX, 0, width, 325, 875), map(mouseY, 0, width, 700, 1190), 75, 75);
+    noStroke();
+    ellipse(map(mouseX, 0, width, 333, 865), map(mouseY, 0, width, 715, 1190), 75, 75);
+    ellipse(map(mouseX, 0, width, 342, 855), map(mouseY, 0, width, 730, 1190), 75, 75);
+    stroke(0);
+    ellipse(map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1190), 75, 75);
 
-  /*noStroke();
-   fill(100);
-   strokeWeight(1);
-   translate(map(mouseX, 0, width, 110, 290), map(mouseY, 0, width, 220, 400));
-   rotate(map(mouseX, 0, width, 0.5, -0.5) * map(-mouseY, 0, width, -0.9, 0.9));
-   rect(0, 0, 40, 30);*/
+    //Handle
+    fill(110);
+    strokeWeight(45);
+    stroke(120);
+    line (map(mouseX, 0, width, 350, 850), map(mouseY, 0, width, 740, 1200), map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200));
+
+    noStroke();
+    fill(100);
+    ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 45, 45);
+  }
+  
+  if(doorPressed)
+  {
+    animation.display();
+    s++;
+
+    if(s >= 300)
+    {
+      s = 0;
+      doorPressed = false;
+      room1.roomNumber++;
+      distance = 0;
+    }
+    else if(s >= 250)
+    {
+      dSize *= 1.2;
+    }
+    else if (s >= 200)
+    {
+      dSize++;
+    }
+  }
 }
 
 void mousePressed()
 {
-  
+  gameStart = true;
+  if (mouseX > 150 && mouseX < 740 && mouseY > 320 && mouseY < 980 && distance <= -495)
+  {
+    doorPressed = true;
+  }
 }
 void keyPressed()
 {
   if (key == 'w')
   {
-    distance += 2;
+    distance -= 2;
   }
   if (key == 's')
   {
-    distance -= 2;
+    distance += 2;
   }
-  if(key == 'r')
+
+  if (key == 'r' && !flash)
   {
-    spin = true;
-    t = 0;
+    flash = true;
+  }
+  else if (flash)
+  {
+    flash = false;
   }
 }
 void keyReleased()
 {
-  
 }
