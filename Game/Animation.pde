@@ -9,9 +9,9 @@ class Animation {
     }
     z = dSize;
     rectMode(CENTER);
-    fill(0);
+    fill(10);
     rect(600, 600, width, height);
-    fill(0, 0);
+    fill(0);
     strokeWeight(2);
     stroke(90);
     rect(600, 655, 285 + z*2, 680 + z*2);
