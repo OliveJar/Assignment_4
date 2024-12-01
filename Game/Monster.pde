@@ -18,7 +18,7 @@ class Monster
       
       if (flFrames == 4)
       {
-        flicker = random(0,1);
+        flicker = random(0.5,1.5);
         flFrames = 0;
       }
     }

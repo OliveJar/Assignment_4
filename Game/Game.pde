@@ -18,6 +18,8 @@ int flFrames;
 float chase;
 float monsterDelay;
 float monsterTimer = 200;
+PFont halloween;
+PFont basic;
 
 
 import processing.sound.*;
@@ -32,10 +34,13 @@ void setup()
 
 void draw()
 {
-  noCursor();
   background(10);
   rectMode(CENTER);
   ellipseMode(CENTER);
+  halloween = createFont("October_Crow.ttf", 60);
+
+  basic = createFont("Heavitas.ttf", 40);
+
 
   //Create Room, Monster, and load sound
   room1 = new Rooms();
@@ -50,15 +55,17 @@ void draw()
   if (!gameStart && !menu)
   {
     cursor();
-    textSize(60);
+    textSize(30);
+    textFont(halloween);
     fill(255);
-    text("A 3D Horror Game", 390, 376);
+    text("A 3D Horror Game", 395, 376);
     fill(255, 20, 0);
-    text("A 3D Horror Game", 390, 380);
+    text("A 3D Horror Game", 395, 380);
+    textFont(basic);
     fill(255);
-    text("Click anywhere to start", 330, 1004);
+    text("Click anywhere to start", 295, 1014);
     fill(255, 20, 0);
-    text("Click anywhere to start", 330, 1000);
+    text("Click anywhere to start", 295, 1010);
     //println(mouseX, mouseY);
   }
 
@@ -66,14 +73,14 @@ void draw()
   {
     cursor();
     fill(255);
-    text("and left-click to interact", 300, 270);
+    text("and left-click to interact", 280, 270);
     fill(255, 20, 0);
-    text("Use 'w' and 's' to walk", 330, 200);
+    text("Use 'w' and 's' to walk", 340, 200);
 
     fill(255, 20, 0);
-    text("When you see the monster", 280, 1030);
+    text("When you see the monster", 260, 1050);
     fill(255);
-    text("Use 'e' to turn off your flashlight", 210, 1130);
+    text("Use 'e' to turn off your flashlight", 170, 1130);
 
     fill(10, 255, 0);
     rect(600, 900, 300, 100);
@@ -85,6 +92,7 @@ void draw()
 
   if (gameStart)
   {
+    noCursor();
     if (monsterDelay == 0)
     {
       chase = random(0, 5);
