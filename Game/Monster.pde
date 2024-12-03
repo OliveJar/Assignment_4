@@ -4,7 +4,7 @@ class Monster
   PImage monster[];
 
   void display()
-  {
+  { 
     imageMode(CENTER);
     monster = new PImage[3];
     monster[1] = loadImage("monster_fullsmile.png");
@@ -12,7 +12,9 @@ class Monster
 
     if (isChased)
     {
-      translate(mouseX, mouseY);
+      position.x = pmouseX;
+      position.y = pmouseY;
+      translate(position.x, position.y);
       scale(0.5, 0.5);
       image(monster[1], 0, 0);
       

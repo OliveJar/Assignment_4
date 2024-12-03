@@ -3,6 +3,7 @@ Rooms room1;
 float distance;
 Animation animation;
 Monster monster;
+gameOver GameOver;
 boolean gameStart = false;
 boolean doorPressed;
 boolean flash = true;
@@ -20,12 +21,19 @@ float monsterDelay;
 float monsterTimer = 200;
 PFont halloween;
 PFont basic;
+boolean isGameOver = false;
+boolean isGameWon;
+float JumpscareTimer = 100;
+float Opacity = 255;
 
+PImage menuScreen;
+PImage start;
 
 import processing.sound.*;
 
 SoundFile clickOn;
 SoundFile clickOff;
+SoundFile Screach;
 
 void setup()
 {
@@ -40,22 +48,36 @@ void draw()
   halloween = createFont("October_Crow.ttf", 60);
 
   basic = createFont("Heavitas.ttf", 40);
-
+  
+  menuScreen = new PImage();
+  menuScreen = loadImage("Menu Screen.png");
+  start = new PImage();
+  start = loadImage("Start Screen.png");
 
   //Create Room, Monster, and load sound
   room1 = new Rooms();
   room1.display();
+  GameOver = new gameOver();
   animation = new Animation();
   monster = new Monster();
   clickOn = new SoundFile(this, "clickOn.mp3");
   clickOff = new SoundFile(this, "clickOff.mp3");
+  Screach = new SoundFile(this, "Screach.mp3");
+  Screach.amp(0.5);
   soundDelay--;
   monsterDelay = (frameCount*0.1)%20;
+  
+  if (isGameOver)
+    {
+      JumpscareTimer--;
+    }
+  
+  GameOver.display();
 
   if (!gameStart && !menu)
   {
     cursor();
-    textSize(30);
+    /*textSize(30);
     textFont(halloween);
     fill(255);
     text("A 3D Horror Game", 395, 376);
@@ -66,31 +88,38 @@ void draw()
     text("Click anywhere to start", 295, 1014);
     fill(255, 20, 0);
     text("Click anywhere to start", 295, 1010);
-    //println(mouseX, mouseY);
+    //println(mouseX, mouseY);*/
+    pushMatrix();
+    translate(600, 600);
+    image(start, 0, 0);
+    popMatrix();
+
   }
 
   if (menu && !gameStart)
   {
     cursor();
-    fill(255);
+    /*fill(255);
     text("and left-click to interact", 280, 270);
     fill(255, 20, 0);
     text("Use 'w' and 's' to walk", 340, 200);
+    fill(255, 20, 0);
+    text("Make it to the Exit!", 360, 340);
 
     fill(255, 20, 0);
-    text("When you see the monster", 260, 1050);
+    text("When you see the monster", 260, 1030);
     fill(255);
-    text("Use 'e' to turn off your flashlight", 170, 1130);
+    text("Use 'e' to turn off your flashlight", 170, 1100);
 
     fill(10, 255, 0);
-    rect(600, 900, 300, 100);
+    rect(600, 885, 300, 100);
     fill(0);
-    text("Play", 550, 920);
+    text("Play", 550, 900);*/
 
     menuDelay--;
   }
 
-  if (gameStart)
+  if (gameStart && !isGameOver)
   {
     noCursor();
     if (monsterDelay == 0)
@@ -123,31 +152,28 @@ void draw()
     //On and Off
     if (flash)
     {
-      //animation.display();
-      //reload animation placeholder
       fill(0);
       rect(600, 600, width, height);
-      //fill(0, 0);
-      //stroke(100, 255, 10);
-      //arc(map(mouseX, 0, width, 315, 885), map(mouseY, 0, width, 630, 1185), 200, 200, (frameCount*0.1) * PI - PI, (frameCount*0.1)*PI);
     }
       
      if(chase > 3)
      {
        flFrames++;
-       monsterTimer = 200;
        isChased = true;
      }
      if(chase < 1)
      {
        isChased = false;
-       monsterTimer = 200;
      }
      if (isChased)
      {
        pushMatrix();
        monster.display();
        popMatrix();
+     }
+     if(!isChased)
+     {
+       monsterTimer = 200;
      }
      println(chase);
 
@@ -182,6 +208,7 @@ void draw()
     {
       flash = true;
       println("GameOver");
+      isGameOver = true;
     }
     
   }
@@ -194,6 +221,7 @@ void draw()
 
   if (doorPressed)
   {
+    flash = true;
     animation.display();
     s++;
 
@@ -202,6 +230,9 @@ void draw()
       s = 0;
       doorPressed = false;
       distance = 0;
+      flash = false;
+      clickOn.play();
+      soundDelay = 30;
     } else if (s >= 250)
     {
       dSize *= 1.2;
@@ -223,7 +254,7 @@ void mousePressed()
   if (mouseX > 150 && mouseX < 740 && mouseY > 320 && mouseY < 980 && distance <= -495)
   {
     doorPressed = true;
-    clickOn.play();
+    clickOff.play();
     soundDelay = 30;
   }
 
@@ -239,7 +270,7 @@ void mousePressed()
 }
 void keyPressed()
 {
-  if (key == 'w' && gameStart)
+  if (key == 'w' && gameStart && !flash)
   {
     distance -= 2;
   }
@@ -248,7 +279,7 @@ void keyPressed()
     distance += 2;
   }
 
-  if (key == 'e' && !flash && soundDelay <= 0 && gameStart)
+  if (key == 'e' && !flash && soundDelay <= 0 && gameStart && !isGameOver)
   {
     flash = true;
     clickOff.play();
