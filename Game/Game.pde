@@ -199,7 +199,7 @@ void draw()
   {
     flash = true;
     animation.display();
-    s++;
+    s += 3;
 
     if (s >= 300)
     {
@@ -211,7 +211,7 @@ void draw()
       soundDelay = 30;
     } else if (s >= 250)
     {
-      dSize *= 1.2;
+      dSize *= 1.5;
     } else if (s >= 200)
     {
       dSize++;
