@@ -46,7 +46,6 @@ void draw()
   rectMode(CENTER);
   ellipseMode(CENTER);
   imageMode(CENTER);
-  println(mouseX, mouseY);
 
   basic = createFont("Heavitas.ttf", 40);
   
@@ -64,7 +63,7 @@ void draw()
   clickOn = new SoundFile(this, "clickOn.mp3");
   clickOff = new SoundFile(this, "clickOff.mp3");
   Screach = new SoundFile(this, "Screach.mp3");
-  Screach.amp(0.5);
+  Screach.amp(0.2);
   soundDelay--;
   monsterDelay = (frameCount*0.1)%20;
   
