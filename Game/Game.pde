@@ -98,7 +98,7 @@ void draw()
   if (gameStart && !isGameOver)
   {
     noCursor();
-    if (monsterDelay == 0)
+    if (monsterDelay == 0 && !doorPressed)
     {
       chase = random(0, 5);
     }
@@ -132,12 +132,12 @@ void draw()
       rect(600, 600, width, height);
     }
       
-     if(chase > 3)
+     if(chase >= 3)
      {
        flFrames++;
        isChased = true;
      }
-     if(chase < 1)
+     if(chase < 3)
      {
        isChased = false;
      }
@@ -203,7 +203,8 @@ void draw()
 
     if (s >= 300)
     {
-      s = 0;
+      dSize = 1;
+      s = 1;
       doorPressed = false;
       distance = 0;
       flash = false;
