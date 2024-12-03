@@ -37,7 +37,7 @@ SoundFile Screach;
 void setup()
 {
   size(1200, 1200);
-
+  frameRate(60);
 }
 
 void draw()
@@ -48,6 +48,7 @@ void draw()
   imageMode(CENTER);
 
   basic = createFont("Heavitas.ttf", 40);
+  textFont(basic);
   
   menuScreen = new PImage();
   menuScreen = loadImage("Menu Screen.png");
@@ -63,7 +64,7 @@ void draw()
   clickOn = new SoundFile(this, "clickOn.mp3");
   clickOff = new SoundFile(this, "clickOff.mp3");
   Screach = new SoundFile(this, "Screach.mp3");
-  Screach.amp(0.2);
+  
   soundDelay--;
   monsterDelay = (frameCount*0.1)%20;
   
