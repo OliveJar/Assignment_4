@@ -4,6 +4,7 @@ float distance;
 Animation animation;
 Monster monster;
 gameOver GameOver;
+win winState;
 boolean gameStart = false;
 boolean doorPressed;
 boolean flash = true;
@@ -24,6 +25,7 @@ boolean isGameOver = false;
 boolean isGameWon;
 float JumpscareTimer = 100;
 float Opacity = 255;
+boolean escaped = false;
 
 PImage menuScreen;
 PImage start;
@@ -47,7 +49,6 @@ void draw()
   ellipseMode(CENTER);
   imageMode(CENTER);
 
-
   basic = createFont("Heavitas.ttf", 40);
   textFont(basic);
 
@@ -58,6 +59,7 @@ void draw()
 
   //Create Room, Monster, and load sound
   room1 = new Rooms();
+  winState = new win();
   room1.display();
   GameOver = new gameOver();
   animation = new Animation();
@@ -195,6 +197,10 @@ void draw()
     text("Open", 600, 600);
   }
   println(mouseX, mouseY);
+  if (escaped)
+  {
+    winState.display();
+  }
   if (doorPressed)
   {
     flash = true;
@@ -210,6 +216,7 @@ void draw()
       flash = false;
       clickOn.play();
       soundDelay = 30;
+      room++;
     } else if (s >= 250)
     {
       dSize *= 1.5;
@@ -218,6 +225,10 @@ void draw()
       dSize++;
     }
   }
+  if(room == 5)
+      {
+        escaped = true;
+      }
 }
 
 void mousePressed()
@@ -231,6 +242,15 @@ void mousePressed()
   if (isGameOver && mouseX > 450 && mouseY > 620 && mouseX < 750 && mouseY < 720)
   {
     isGameOver = false;
+    room1.roomNumber = 1;
+    gameStart = false;
+    menu = false;
+    JumpscareTimer = 100;
+  }
+  
+  if (escaped && mouseX > 450 && mouseY > 620 && mouseX < 750 && mouseY < 720)
+  {
+    escaped = false;
     room1.roomNumber = 1;
     gameStart = false;
     menu = false;
