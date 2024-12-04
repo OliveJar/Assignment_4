@@ -52,7 +52,7 @@ class Rooms
       fill(0);
       ellipse(625 - (doorDistance*0.1), 700, 10 - (doorDistance*0.08), 10 - (doorDistance*0.08));
     }
-    
+
     if (roomNumber == 3)
     {
       fill(255);

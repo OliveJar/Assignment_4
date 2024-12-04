@@ -47,9 +47,10 @@ void draw()
   ellipseMode(CENTER);
   imageMode(CENTER);
 
+
   basic = createFont("Heavitas.ttf", 40);
   textFont(basic);
-  
+
   menuScreen = new PImage();
   menuScreen = loadImage("Menu Screen.png");
   start = new PImage();
@@ -64,15 +65,15 @@ void draw()
   clickOn = new SoundFile(this, "clickOn.mp3");
   clickOff = new SoundFile(this, "clickOff.mp3");
   Screach = new SoundFile(this, "Screach.mp3");
-  
+
   soundDelay--;
   monsterDelay = (frameCount*0.1)%20;
-  
+
   if (isGameOver)
-    {
-      JumpscareTimer--;
-    }
-  
+  {
+    JumpscareTimer--;
+  }
+
   GameOver.display();
 
   if (!gameStart && !menu)
@@ -81,7 +82,6 @@ void draw()
     pushMatrix();
     image(start, 600, 530);
     popMatrix();
-
   }
 
   if (menu && !gameStart)
@@ -90,7 +90,7 @@ void draw()
     pushMatrix();
     image(menuScreen, 600, 530);
     popMatrix();
-    
+
 
     menuDelay--;
   }
@@ -102,7 +102,7 @@ void draw()
     {
       chase = random(0, 5);
     }
-    
+
     //Triangle/Light refraction of flashlight
     noStroke();
     fill(20, 100*flicker);
@@ -131,27 +131,27 @@ void draw()
       fill(0);
       rect(600, 600, width, height);
     }
-      
-     if(chase >= 3)
-     {
-       flFrames++;
-       isChased = true;
-     }
-     if(chase < 3)
-     {
-       isChased = false;
-     }
-     if (isChased)
-     {
-       pushMatrix();
-       monster.display();
-       popMatrix();
-     }
-     if(!isChased)
-     {
-       monsterTimer = 200;
-     }
-     println(chase);
+
+    if (chase >= 3)
+    {
+      flFrames++;
+      isChased = true;
+    }
+    if (chase < 3)
+    {
+      isChased = false;
+    }
+    if (isChased)
+    {
+      pushMatrix();
+      monster.display();
+      popMatrix();
+    }
+    if (!isChased)
+    {
+      monsterTimer = 200;
+    }
+    println(chase);
 
     //Flashlight tip
     strokeWeight(1.5);
@@ -173,20 +173,19 @@ void draw()
     noStroke();
     fill(100);
     ellipse (map(mouseX, 0, width, 450, 750), map(mouseY, 0, width, 900, 1200), 45, 45);
-    
+
     //-----------------------------------------------------------------------------------------------------------//
-    
+
     if (isChased && !flash)
     {
       monsterTimer--;
     }
-    if(monsterTimer <= 1)
+    if (monsterTimer <= 1)
     {
       flash = true;
       println("GameOver");
       isGameOver = true;
     }
-    
   }
 
   if (distance <= -495)
