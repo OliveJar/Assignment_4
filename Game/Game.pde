@@ -149,6 +149,7 @@ void draw()
     }
     if (!isChased)
     {
+      flicker = 1;
       monsterTimer = 200;
     }
     println(chase);
