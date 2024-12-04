@@ -26,6 +26,9 @@ boolean isGameWon;
 float JumpscareTimer = 100;
 float Opacity = 255;
 boolean escaped = false;
+float x = 600;
+float y = 1;
+PVector acceleration;
 
 PImage menuScreen;
 PImage start;
@@ -53,6 +56,13 @@ void draw()
   rectMode(CENTER);
   ellipseMode(CENTER);
   imageMode(CENTER);
+  
+  y = (y*1.3)%height;
+  acceleration = new PVector(x, y);
+  if (y > 1120)
+    {
+      x = random(20, width-20);
+    }
 
   basic = createFont("Heavitas.ttf", 40);
   textFont(basic);
@@ -75,7 +85,7 @@ void draw()
   Door = new SoundFile(this, "Door.mp3");
   
   soundDelay--;
-  monsterDelay = (frameCount*0.1)%20;
+  monsterDelay = (frameCount*0.2)%20;
   
   if(!(Background.isPlaying()))
   {
@@ -163,7 +173,7 @@ void draw()
     if (!isChased)
     {
       flicker = 1;
-      monsterTimer = 200;
+      monsterTimer = 70;
     }
     println(chase);
 

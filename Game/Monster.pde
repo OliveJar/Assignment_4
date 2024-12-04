@@ -18,7 +18,7 @@ class Monster
       scale(0.5, 0.5);
       image(monster[1], 0, 0);
       
-      if (flFrames == 4)
+      if (flFrames == 2)
       {
         flicker = random(0.5,1.5);
         flFrames = 0;
