@@ -194,7 +194,7 @@ void draw()
     fill(255, 100);
     text("Open", 600, 600);
   }
-
+  println(mouseX, mouseY);
   if (doorPressed)
   {
     flash = true;
@@ -226,6 +226,15 @@ void mousePressed()
   if (!gameStart)
   {
     menu = true;
+  }
+  
+  if (isGameOver && mouseX > 450 && mouseY > 620 && mouseX < 750 && mouseY < 720)
+  {
+    isGameOver = false;
+    room1.roomNumber = 1;
+    gameStart = false;
+    menu = false;
+    JumpscareTimer = 100;
   }
 
   if (mouseX > 150 && mouseX < 740 && mouseY > 320 && mouseY < 980 && distance <= -495)

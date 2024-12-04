@@ -2,13 +2,16 @@ class gameOver
 {
   PVector jumpscare;
   PImage monster[];
+  PImage gameover;
   void display()
   {
-    
+    gameover = new PImage();
+    gameover = loadImage("GameOver Screen.png");
     if (isGameOver)
     {
       fill(100);
       rect(600, 600, width, height);
+      image(gameover, 600, 600);
     }
     
     if (isGameOver && JumpscareTimer>0)
@@ -31,5 +34,6 @@ class gameOver
       rotate(sin(frameCount*0.2));
       image(monster[1], 0, 0);
     }
+    
   }
 }
