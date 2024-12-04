@@ -35,11 +35,16 @@ import processing.sound.*;
 SoundFile clickOn;
 SoundFile clickOff;
 SoundFile Screach;
+SoundFile Background;
+SoundFile Door;
 
 void setup()
 {
   size(1200, 1200);
   frameRate(60);
+  
+  Background = new SoundFile(this, "Background Music.mp3");
+  Background.play();
 }
 
 void draw()
@@ -67,9 +72,15 @@ void draw()
   clickOn = new SoundFile(this, "clickOn.mp3");
   clickOff = new SoundFile(this, "clickOff.mp3");
   Screach = new SoundFile(this, "Screach.mp3");
-
+  Door = new SoundFile(this, "Door.mp3");
+  
   soundDelay--;
   monsterDelay = (frameCount*0.1)%20;
+  
+  if(!(Background.isPlaying()))
+  {
+    Background.play();
+  }
 
   if (isGameOver)
   {
@@ -196,7 +207,7 @@ void draw()
     fill(255, 100);
     text("Open", 600, 600);
   }
-  println(mouseX, mouseY);
+
   if (escaped)
   {
     winState.display();
@@ -225,10 +236,10 @@ void draw()
       dSize++;
     }
   }
-  if(room == 5)
-      {
-        escaped = true;
-      }
+  if (room == 5)
+  {
+    escaped = true;
+  }
 }
 
 void mousePressed()
@@ -238,7 +249,7 @@ void mousePressed()
   {
     menu = true;
   }
-  
+
   if (isGameOver && mouseX > 450 && mouseY > 620 && mouseX < 750 && mouseY < 720)
   {
     isGameOver = false;
@@ -247,7 +258,7 @@ void mousePressed()
     menu = false;
     JumpscareTimer = 100;
   }
-  
+
   if (escaped && mouseX > 450 && mouseY > 620 && mouseX < 750 && mouseY < 720)
   {
     escaped = false;
@@ -260,6 +271,7 @@ void mousePressed()
   if (mouseX > 150 && mouseX < 740 && mouseY > 320 && mouseY < 980 && distance <= -495)
   {
     doorPressed = true;
+    Door.play();
     clickOff.play();
     soundDelay = 30;
   }

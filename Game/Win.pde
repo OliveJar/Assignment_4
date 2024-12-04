@@ -2,8 +2,6 @@ class win
 {
   PImage Win;
   
-  
-  
   void display()
   {
     Win = new PImage();
