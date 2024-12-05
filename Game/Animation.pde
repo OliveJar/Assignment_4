@@ -3,14 +3,17 @@ class Animation {
   float z = 0;
   void display()
   {
+    //animation timers
     if (s >= 1)
     {
       t=s;
     }
     z = dSize;
     rectMode(CENTER);
+    //canvas
     fill(10);
     rect(600, 600, width, height);
+    //door
     fill(0);
     strokeWeight(2);
     stroke(90);
