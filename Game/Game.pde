@@ -23,7 +23,7 @@ float monsterTimer = 200;
 PFont basic;
 boolean isGameOver = false;
 boolean isGameWon;
-float JumpscareTimer = 100;
+float JumpscareTimer = 50;
 float Opacity = 255;
 boolean escaped = false;
 float x = 600;
@@ -59,9 +59,9 @@ void draw()
   
   y = (y*1.3)%height;
   acceleration = new PVector(x, y);
-  if (y > 1120)
+  if (y > 1100)
     {
-      x = random(20, width-20);
+      x = random(mouseX-250, mouseX+250);
     }
 
   basic = createFont("Heavitas.ttf", 40);
@@ -94,6 +94,7 @@ void draw()
 
   if (isGameOver)
   {
+    cursor();
     JumpscareTimer--;
   }
 
@@ -226,7 +227,7 @@ void draw()
   {
     flash = true;
     animation.display();
-    s += 3;
+    s += 6;
 
     if (s >= 300)
     {
@@ -238,10 +239,10 @@ void draw()
       clickOn.play();
       soundDelay = 30;
       room++;
-    } else if (s >= 250)
+    } else if (s >= 200)
     {
       dSize *= 1.5;
-    } else if (s >= 200)
+    } else if (s >= 150)
     {
       dSize++;
     }
@@ -249,6 +250,7 @@ void draw()
   if (room == 5)
   {
     escaped = true;
+    cursor();
   }
 }
 

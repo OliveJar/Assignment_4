@@ -22,9 +22,9 @@ class gameOver
       monster[1] = loadImage("monster_fullsmile.png");
       jumpscare = new PVector (0.5, 0.5);
       fill(255, 10, 10);
-      if (JumpscareTimer < 100)
+      if (JumpscareTimer < 25)
     {
-      Opacity -= 2.5;
+      Opacity -= 10.2;
       fill(255, 10, 10, Opacity);
     }
       rect(600, 600, width, height);
