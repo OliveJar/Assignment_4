@@ -283,9 +283,11 @@ void mousePressed()
   if (isGameOver && mouseX > 450 && mouseY > 620 && mouseX < 750 && mouseY < 720)
   {
     isGameOver = false;
+    isChased = false;
     room1.roomNumber = 1;
     gameStart = false;
     menu = false;
+    monsterTimer = 70;
     JumpscareTimer = 100;
   }
 
